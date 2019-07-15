@@ -1,0 +1,233 @@
+b();
+console.log(a);  -->excuted but undefined
+
+var a;
+console.log(a);
+
+a = undefined; --> never do this value this is perfect javascript but creat problem 
+
+if (a === undefined){
+	console.log('a is undefined!')
+}
+else{
+	console.log('a is defined!')
+	
+}
+excuted undefined mean this is value alreay have but did get any value in it.special keyword
+do not put the value as undefined 
+
+
+
+console.log(a);
+
+
+if (a === undefined){
+	console.log('a is undefined!')
+}
+else{
+	console.log('a is defined!')
+	
+}
+  -->uncaugh reference error a is not defined (mean I dont have any memory of a)*/
+  
+function b(){
+	console.log('Called b!');
+  }
+  
+  b();
+  
+  console.log(a);
+  
+  var a = 'Hello World!'
+  
+  console.log(a);
+ 
+  ex> function invocation and the execution stack
+  function a(){
+	  b();
+	  var c;
+  }
+  function b (){
+	 var d;
+  }
+  a();
+  var d;
+
+   
+ex> variable environment: where the variables live (and how they relate to each other in memory)
+   
+   function b(){
+	   var myVar;
+	   console.log(myVar);
+   }                     // b () Execution Context (create and execute)myVar undefined
+   
+   function a(){
+	   var myVar = 2;
+	   console.log(myVar);
+	   b();             // a () Execution Context(create and execute) myVar 2
+   }
+  
+  var myVar = 1;
+  console.log(myVar);  //global execution gontext(created and code is executed) myVar 1
+   a();
+   console.log(myVar);
+   
+
+   function b(){
+	   var myVar;
+	   console.log(myVar);
+   }                     // b () Execution Context (create and execute)myVar undefined
+   
+   function a(){
+	   var myVar = 'my name is Eugene';
+	   console.log(myVar);
+	   b();             // a () Execution Context(create and execute) myVar 2
+   }
+  function c(){
+	  var myVar = 'I have cats';
+	  console.log(myVar);
+	  b();
+  }
+  var myVar = 'nice weather today';
+  console.log(myVar);  //global execution gontext(created and code is executed) myVar 1
+   a();
+   console.log(myVar);
+   c();
+   console.log(myVar);
+
+the scope chain
+function b(){
+	console.log(myVar);
+}  
+   
+function a(){
+	var myVar = 'my name is Eugene';
+	b(); 
+}
+var myVar = 'I have cats';
+	a();
+
+--->executed I have cats
+	 
+
+   
+function a(){
+	function b(){
+	console.log(myVar);
+}  
+	var myVar = 'my name is Eugene';
+	b(); 
+}
+var myVar = 'I have cats';
+	a(); 
+--->executed 'my name is Eugene';
+
+
+function a(){
+	function b(){
+		console.log(myVar);
+	}
+	b();
+}
+var myVar ='I have cats';
+a();
+--->executed I have cats
+
+
+function b(){
+    console.log(myVar);
+	}
+function a(){
+     b();
+}
+var myVar ='I have cats';
+a();
+--->executed I have cats
+
+
+function a(){
+	function b(){
+		console.log(myVar);
+	}
+	var myVar ='my name is Eugene';
+	b();
+}
+
+var myVar = 'I have cats';
+a();
+
+
+
+//long running function
+function waitThreeSecounds(){
+	var ms = 3000 + new Date().getTime();
+while(new Date() < ms){}
+console.log('finished function');	
+}
+
+function clickHandler(){
+	console.log('click event!');
+}
+
+//listen for the click event
+document.addEventListener('click',clickHandler);
+
+waitThreeSecounds();
+console.log('finished execution');
+
+-->executed finished function 
+            finished execution
+			click event!
+
+
+Condeptual aside operator
+var a = 3 + 4;
+console.log(a);    //-->executed 7
+
+var a = 4 - 3;
+console.log(a);    //-->executed 1
+
+ 
+ var a = 4 > 3;
+console.log(a);    //-->executed True
+
+
+
+ 
+ //operator precedence and associativity
+ 
+ var a = 3 + 4 * 5;
+ console.log(a);
+
+ var a = 2,b = 3,c = 4;  // <--	Assignment	right-to-left
+     a = b = c;
+	 
+	 console.log(a); 	 //<-- executed 4
+	 console.log(b);	 //<-- executed 4
+	 console.log(c);	 //<-- executed 4
+	 
+
+  var a = (3 + 4) * 5;  //<-- grouping first
+   console.log(a);      //<--executed 35
+
+Coercion:converting a value from one type to another
+this happens quite often in javascript becuase it's dynamically typed
+   
+   var a = 'Hello' + 'World';
+   console.log(a);             //-->executed HelloWorld
+   
+   var a = 1 + '2';
+      console.log(a);         //-->executed 12
+   
+    var a = '1' + '2';
+    console.log(a);         //-->executed 12
+	  
+	     var a = 1 ,b = '2';
+    console.log(a+b);         //-->executed 12
+	  
+
+//Comparison Operators
+console.log (1 < 2 < 3); //<-- True
+console.log (3 < 2 < 1); //<-- True  ... < ...left to right
+console.log (1 > 2 > 3); //<-- false ... > ... left to right
+console.log (false < 1); //<-- 
