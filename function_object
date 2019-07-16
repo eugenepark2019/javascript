@@ -1,0 +1,81 @@
+function a(){
+    console.log(this);
+	this.newvariable = 'hello';
+}
+var b = function(){
+	console.log(this);
+}
+
+a();
+
+console.log(newvariable);
+
+b();
+
+
+var c = {
+	name: 'The c object',//creat method
+	log:function(){
+		
+		this.name ='updated c object';
+		console.log(this);
+		
+		var setname = function(newname){
+			this.name = newname;
+			
+		}
+		setname('Updated again! the c object');
+		console.log(this);
+	}
+}
+
+c.log();
+
+==>
+Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+this.js:24 hello
+this.js:19 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+this.js:34 {name: "updated c object", log: ƒ}
+this.js:41 {name: "updated c object", log: ƒ}
+
+
+function a(){
+    console.log(this);
+	this.newvariable = 'hello';
+}
+var b = function(){
+	console.log(this);
+}
+
+a();
+
+console.log(newvariable);
+
+b();
+
+
+var c = {
+	name: 'The c object',//creat method
+	log:function(){
+		var self = this
+		
+		self.name ='updated c object';
+		console.log(self);
+		
+		var setname = function(newname){
+			self.name = newname;
+			
+		}
+		setname('Updated again! the c object');
+		console.log(self);
+	}
+}
+
+c.log();
+
+==>
+Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+this.js:24 hello
+this.js:19 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+this.js:35 {name: "updated c object", log: ƒ}
+this.js:42 {name: "Updated again! the c object", log: ƒ}
